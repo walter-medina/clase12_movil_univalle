@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         sharedPreferences = getSharedPreferences("shared", Context.MODE_PRIVATE)
-        isSesion()
+        sesion()
         setup()
         registerUser()
         loginUser()
@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun isSesion(){
+    private fun sesion(){
         val email = sharedPreferences.getString("email",null)
         if (email != null){
             binding.clContenedor.visibility = View.INVISIBLE

@@ -8,57 +8,17 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:context=".view.HomeActivity">
-
-        <TextView
-            android:id="@+id/tvTitleLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home App"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:padding="20dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvBienvenido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleLogin" />
-
-        <TextView
-            android:id="@+id/tvTitleEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ejemplo@correo.com"
-            android:padding="20dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBienvenido" />
-
-
-        <Button
-            android:id="@+id/btnLogOut"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navigationContainer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cerrar Sesión"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,33 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
-        sharedPreferences = getSharedPreferences("shared",Context.MODE_PRIVATE)
-        dataLogin()
-        setup()
     }
-
-    private fun setup() {
-        binding.btnLogOut.setOnClickListener {
-            logOut()
-        }
-    }
-
-    private fun dataLogin() {
-        val bundle = intent.extras
-        val email = bundle?.getString("email")
-        binding.tvTitleEmail.text = email ?: ""
-        sharedPreferences.edit().putString("email",email).apply()
-    }
-
-    private fun logOut() {
-        sharedPreferences.edit().clear().apply()
-        FirebaseAuth.getInstance().signOut()
-        startActivity(Intent(this,LoginActivity::class.java))
-
-    }
-
 }
