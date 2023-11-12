@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1006922765737",
+    "project_id": "loginfirebase-ef17b",
+    "storage_bucket": "loginfirebase-ef17b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006922765737:android:bb8bf98bb46e4d01e4e0b8",
+        "android_client_info": {
+          "package_name": "com.appmovil.loginfirestore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzNr24UX3letC7N1xb-XHV5ROMqWAFkrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
