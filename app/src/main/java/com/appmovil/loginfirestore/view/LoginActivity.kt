@@ -75,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-    override fun onStart() {
-        super.onStart()
-        binding.clContenedor.visibility = View.VISIBLE
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        binding.clContenedor.visibility = View.VISIBLE
+//    }
 }
