@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun goToHome(email: String?){
         val intent = Intent (this, HomeActivity::class.java).apply {
-            putExtra("email",email)
+            sharedPreferences.edit().putString("email",email).apply()
         }
         startActivity(intent)
         finish()

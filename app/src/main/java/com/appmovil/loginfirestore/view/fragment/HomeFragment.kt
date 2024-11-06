@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences = requireActivity().getSharedPreferences("shared", Context.MODE_PRIVATE)
-        dataLogin()
         setup()
         listarProducto()
     }
@@ -45,6 +44,7 @@ class HomeFragment : Fragment() {
         binding.btnGuardarArticulo.setOnClickListener {
             guardarProducto()
         }
+        binding.tvTitleEmail.text = sharedPreferences.getString("email",null)
     }
     private fun guardarProducto() {
         val codigo = binding.etCodigo.text.toString()
