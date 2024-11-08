@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.appmovil.loginfirestore.R
 import com.appmovil.loginfirestore.databinding.ActivityLoginBinding
+import com.appmovil.loginfirestore.model.UserRequest
 import com.appmovil.loginfirestore.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 
@@ -26,7 +27,23 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("shared", Context.MODE_PRIVATE)
         sesion()
         setup()
+        viewModelObservers()
     }
+    private fun viewModelObservers() {
+        observerIsRegister()
+    }
+    private fun observerIsRegister() {
+        loginViewModel.isRegister.observe(this) { userResponse ->
+            if (userResponse.isRegister) {
+                Toast.makeText(this, userResponse.message, Toast.LENGTH_SHORT).show()
+                sharedPreferences.edit().putString("email",userResponse.email).apply()
+                goToHome()
+            } else {
+                Toast.makeText(this, userResponse.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setup() {
         binding.tvRegister.setOnClickListener {
            registerUser()
@@ -36,22 +53,21 @@ class LoginActivity : AppCompatActivity() {
             loginUser()
         }
     }
-    private fun registerUser(){
+
+    private fun registerUser() {
         val email = binding.etEmail.text.toString()
         val pass = binding.etPass.text.toString()
-        loginViewModel.registerUser(email,pass) { isRegister ->
-            if (isRegister) {
-                goToHome(email)
-            } else {
-                Toast.makeText(this, "Error en el registro", Toast.LENGTH_SHORT).show()
-            }
+        val userRequest = UserRequest(email, pass)
 
+        if (email.isNotEmpty() && pass.isNotEmpty()) {
+            loginViewModel.registerUser(userRequest)
+        } else {
+            Toast.makeText(this, "Campos Vacíos", Toast.LENGTH_SHORT).show()
         }
+
     }
-    private fun goToHome(email: String?){
-        val intent = Intent (this, HomeActivity::class.java).apply {
-            sharedPreferences.edit().putString("email",email).apply()
-        }
+    private fun goToHome(){
+        val intent = Intent (this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -60,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
         val pass = binding.etPass.text.toString()
        loginViewModel.loginUser(email,pass){ isLogin ->
            if (isLogin){
-               goToHome(email)
+               goToHome()
            }else {
                Toast.makeText(this, "Login incorrecto", Toast.LENGTH_SHORT).show()
            }
@@ -71,12 +87,8 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.sesion(email){ isEnableView ->
             if (isEnableView){
                 binding.clContenedor.visibility = View.INVISIBLE
-                goToHome(email)
+                goToHome()
             }
         }
     }
-//    override fun onStart() {
-//        super.onStart()
-//        binding.clContenedor.visibility = View.VISIBLE
-//    }
 }

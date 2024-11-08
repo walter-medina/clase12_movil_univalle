@@ -3,16 +3,19 @@ package com.appmovil.loginfirestore.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.appmovil.loginfirestore.model.UserRequest
+import com.appmovil.loginfirestore.model.UserResponse
 import com.appmovil.loginfirestore.repository.LoginRepository
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginViewModel : ViewModel() {
     private val repository = LoginRepository()
-
-    //registerUser se comunica con el repository
-    fun registerUser(email: String, pass: String, isRegister: (Boolean) -> Unit) {
-        repository.registerUser(email, pass) { response ->
-            isRegister(response)
+    private val _isRegister = MutableLiveData<UserResponse>()
+    val isRegister: LiveData<UserResponse> = _isRegister
+    fun registerUser(userRequest: UserRequest) {
+        repository.registerUser(userRequest) { userResponse ->
+            _isRegister.value = userResponse
         }
     }
 
