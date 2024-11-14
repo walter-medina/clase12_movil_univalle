@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
         val pass = binding.etPass.text.toString()
        loginViewModel.loginUser(email,pass){ isLogin ->
            if (isLogin){
+               sharedPreferences.edit().putString("email",email).apply()
                goToHome()
            }else {
                Toast.makeText(this, "Login incorrecto", Toast.LENGTH_SHORT).show()
